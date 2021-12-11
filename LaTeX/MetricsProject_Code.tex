@@ -1,0 +1,170 @@
+\documentclass[a4paper,oneside]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PREAMBLE
+
+% declare packages:
+
+\usepackage{amsfonts,amsmath,amsthm}			% standard ams packgages
+\usepackage[title,titletoc,toc]{appendix} % Appendix package. Not necessary, but it does make managing appendices easier
+\usepackage{bm}										% bold maths symbols shorter definition: \bm{}
+\usepackage{booktabs}							%	neat lines/rules for tables
+\usepackage{eurosym} 							% neat symbols for Euro
+\usepackage{float}								% allows more control over floats (figures, tables, etc.)
+\usepackage{graphicx}							% for including graphics
+\usepackage{lipsum} 							% insert random text (Lorem Ipsum)
+\usepackage[colorlinks]{hyperref} % colorlinks colours the links instead of boxing them
+\usepackage{natbib}								% references
+\usepackage{setspace}							% single, 1.5, double spacing
+\usepackage{url}									% like hyperref
+
+%%%% Make some adjustments to the document
+
+% change from singlespace to onehalfspace to doublespace
+%\singlespace
+\onehalfspace
+%\doublespace
+
+% define title, author, etc.
+
+\title{Cable Company Case Study}
+
+\author{James Morgan}
+
+\date{\today}
+
+%% END OF PREAMBLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\begin{singlespacing} % wraps abstract to be written with single line spacing
+\begin{abstract}
+	This paper focuses on the exorbitant cost and lack of quality of broadband internet access
+	in the United States relative to OECD countries and the inefficient competitive
+	dynamics present in the Cable Industry. More specifically, it shows that Cable Companies will
+	not be able to compete in perpetuity due to innovation, inflation, higher interest rates and an
+	excessive debt load. By utilizing a continuous state model of industry entry and exit, this paper
+	highlights the unlikelihood that US Cable Companies will continue to have strong performance.
+	Moreover, rising inflation and higher interest rates will present even stronger headwinds for
+	Cable Companies. These findings will demonstrate the high social costs created by the Cable
+	Companies and present a call to action for entrepreneurs and regulatory authorities.\end{abstract}
+\end{singlespacing}
+
+\section{Introduction}
+The shift to remote work has increased the need for network connectivity and is
+beginning to commoditize network services. Consequently, federal and state agencies have taken
+an interest in the industry. Moreover, alternative conduits for broadband connection present a
+market ripe for disruption through innovation. For example, Elon Musk’s company Starlink may
+be able to offer more affordable internet access to customers in rural areas. Starlink uses
+advanced satellites in a low orbit to provide low latency broadband internet access across the
+globe. The development and implementation of 5G may further dampen Cable Company profits,
+especially since 20\% of Americans are smart phone only users. (Bandyopadhyay et al. 2020)
+
+The looming threat of an economic downturn is yet another headwind for Cable
+Companies. The CPI was up 5.4\% year over year in September and the threat of high long term
+inflation is very real. The COVID-19 pandemic and associated government support has created
+an extremely tight labor market. According to the NFIB, 51\% of small business owners reported
+job openings they could not fill in September 2021. This is a record high and is up one point
+from the previous month. (“Jobs Report and Jobs Data from the NFIB Small Business Research
+Center”, n.d.) It seems likely that the FED’s hand will be forced and interest rates will rise as a
+function of inflation.
+
+The relative cost and quality of broadband internet access in the United States poses
+serious concerns about the efficacy of the industry model. The bar graph from the OECD
+Broadband Portal below indicates that the United States is behind many competitors regarding
+broadband internet penetration. This is surprising given the United States overall economic
+presence and brings to the light pressing need to increase penetration rates.
+
+\section{Literature Review}
+
+This is an example of a reference~\citep{engle_autoregressive_1982} or not in parentheses~\citet{engle_autoregressive_1982}. Alternatively, \citeauthor{lucas_jr_econometric_1976} is an example of an author reference, while \citeyear{lane_european_2012} is an example of a year reference. This is an example of referring to a section~\ref{sec:res} within the paper or a subsection~\ref{sec:ssres} or a subsubsection~\ref{sec:sssres}.
+
+\section{Data}
+
+Data is described in appendix~\ref{app:dat}. \textit{This is in italics} and \textbf{this is in bold}.
+
+\section{Model}
+
+Here is an example of an equation:
+
+\begin{equation}
+y_t = \beta_0 + \beta_1x_{1,t} + \beta_2x_{1,t}^2 + \beta_3x_{2,t} + u_t	\quad (t=1,\ldots,T)
+\label{eq:mye1}
+\end{equation}
+
+I refer to equation~\eqref{eq:mye1}, which is a basic equation where $u_t \sim \mathcal{N}(0,\sigma^2)$ is the error term that is an \textit{iid} Normal disturbance with mean zero and standard deviation $\sigma$ (variance is $\sigma^2$).\footnote{This is a footnote.} Letting $\bm{y}=(y_1,\ldots,y_T)^T$, $\boldsymbol{\beta}\equiv(\beta_0,\beta_1,\beta_2,\beta_3)^T$, $\bm{u}=(u_1,\ldots,u_T)^T$ and $\bm{X}$ be the \textit{data} matrix
+\begin{equation*} % stars * suppress labels / numbers appearing
+\bm{X} = 
+\begin{bmatrix}
+1				&	x_{1,1}	&	x_{1,1}^2	& x_{2,1}	\\
+1				&	x_{1,2}	&	x_{1,2}^2	& x_{2,2}	\\
+\vdots	&	\vdots	&	\vdots		&	\vdots	\\
+1				&	x_{1,T}	&	x_{1,T}^2	&	x_{2,T}
+\end{bmatrix}
+\end{equation*}
+we can re-express equation~\eqref{eq:mye1} in matrix form as
+\begin{equation*}
+\bm{y} = \bm{X}\bm{\beta} + \bm{u}
+\end{equation*}
+
+\section{Results}\label{sec:res}
+
+I present results in table~\ref{tab:myt1} and figure~\ref{fig:myf1}. Note that I can control the placement of these `floats' using commands [ht] or [H] where the former specifies the float should be placed [h]ere or on [t]op of the page, if \LaTeXe{} thinks it might be ok, while [H] is a more forceful command to place it [H]ere! Use [H] (and [ht]) with caution -- \LaTeXe{} is like a publisher, e.g. Oxford University Press and is designed to take your document and make it look good with its standard setup. Once you start adjusting these settings be prepared for (a) possibly worse looking documents and (b) a lot of hard work tinkering with the code; adjusting the basic settings is a more advanced topic.
+
+% I use {} after \LaTeXe because otherwise there is no space inserted before the next word
+
+\begin{table}%[ht] or say [H]
+\centering
+\begin{tabular}{ccc} % each column is centered (else could have left aligned [l] or right [r])
+\toprule			
+			&	Age	& Income			\\
+\midrule
+John	&	24	&	\EUR{35,000}	\\
+Mary	& 32	& \EUR{70,000}	\\
+Joe		& 64	& \EUR{45,000}	\\
+\bottomrule
+\end{tabular}
+\caption{This is a table.}
+\label{tab:myt1}
+\end{table}
+
+\begin{figure}%[ht] or say [H]
+% LaTeX is like a publisher e.g. Oxford Publishing: it gives a standard look to documents that is `pretty'; if you start adjusting the way LaTeX produces your document, be prepared for (a) possibly less nice looking results and / or (b) a little bit of trouble before you get it correct in the coding; adjusting the outpuf of LaTeX is a more advanced topic.
+\includegraphics[width=\columnwidth]{img/ps1q20aNice}
+\caption{This is a figure.}
+\label{fig:myf1}
+\end{figure}
+
+\subsection{Subsection Title 1}\label{sec:ssres}
+
+This is an example of a subsection.
+
+\subsection{Subsection Title 2}
+
+This is another example of a subsection.
+
+\subsubsection{Subsubsection Title}\label{sec:sssres}
+
+This is an example of a subsubsection. If you open the pdf version in say \texttt{Adobe (typewriter text)}, you will see that you can open up the results section into two subsections and you can open the second subsection into a subsubsection. Here is an example of a web link: \url{http://scholar.princeton.edu/sites/default/files/01b\%20EuroCrashCourse_slides_0.pdf}.\footnote{Note that I had to put the $\backslash$ before $\%$ so \LaTeXe{} would not interpret $\%$ as a comment.} And  \htmladdnormallink{here}{http://www.michael-curran.com/teaching/teaching.html} is an another example of a web link that hides the link name.
+
+\section{Conclusion}
+
+\lipsum
+
+\bibliographystyle{ecca}
+\bibliography{myrefs}
+
+%\newpage 					% use this if you want a pagebreak e.g. between references and appendices - or you can use \pagebreak
+
+\begin{appendices}
+
+\section{More on data}\label{app:dat}
+
+\lipsum
+
+\end{appendices}
+
+\end{document}
