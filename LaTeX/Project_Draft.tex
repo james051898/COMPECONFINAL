@@ -18,7 +18,7 @@
 \usepackage{setspace}							% single, 1.5, double spacing
 \usepackage{url}									% like hyperref
 \usepackage[euler]{textgreek}
-
+\usepackage{rotating}
 %%%% Make some adjustments to the document
 
 % change from singlespace to onehalfspace to doublespace
@@ -86,7 +86,12 @@ presence and brings to the light pressing need to increase penetration rates.
 
 \section{Data}
 
-Data is described in appendix~\ref{app:dat}. \textit{This is in italics} and \textbf{this is in bold}.
+The primary dataset for this project comes from the 2021 third quarter Charter Communications trending schedule. \citep{chtr_rep} 
+Charter Communications' business model is more focused on broadband internet and is, consequently, more suitable for this project.
+Only revenues attributed to internet service are included in the project dataset. 
+Furthermore, costs and expenses that are explicitly used for non-internet related activities are removed from the dataset.
+In an abundance of caution, any costs and services that relate to internet services are included in the final dataset. 
+It is assumed that these cost and expenses are required operating expenses for a purely broadband internet service company.
 
 \section{Models}
 \subsection{Optimal Monetary Policy Model}
@@ -236,6 +241,53 @@ Due to the nature of the cable industry and the necessity of connectivity, exit 
 
 \begin{appendices}
 
+\pagebreak	
 \section{More on data}\label{app:dat}
+\pagebreak
+\begin{table}%[ht] or say [H]
+	\centering
+	\begin{tabular}{cccccc}\hline % each column is centered (else could have left aligned [l] or right [r])
+		\toprule			
+		Label & Q1 2019 & Q2 2019 & Q3 2019 & Q4 2019 & FY 2019 \\
+		\midrule
+		Penetration Rate & 50\% & 50\% & 51\% & 51\% & 51\% \\
+		\:\: Revenue per Passing & $78.31 & $79.49 & $80.77 & $83.31 & $319.57 \\
+		\:\: Cost to Service Customer Per Capita & $35.46 & $34.23 & $36.47 & $34.40 & $139.53 \\
+		\:\: Other Costs Per Passing & $43.34 & $41.84 & $44.57 & $42.04 & $170.54 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Data points for 2019}
+	\label{tab:myt1}
+\end{table}
+\begin{table}%[ht] or say [H]
+	\centering
+	\begin{tabular}{cccccc}\hline % each column is centered (else could have left aligned [l] or right [r])
+		\toprule			
+		Label & Q1 2020 & Q2 2020 & Q3 2020 & Q4 2020 & FY 2020 \\
+		\midrule
+		Penetration Rate & 52\% & 53\% & 54\% & 54\% & 54\% \\
+		\:\: Revenue per Passing & $84.07 & $85.94 & $89.06 & $91.22 & $347.49 \\
+		\:\: Cost to Service Customer Per Capita & $35.26 & $35.06 & $35.87 & $35.16 & $140.19 \\
+		\:\: Other Costs Per Passing & $43.09 & $42.85 & $43.84 & $42.97 & $171.34 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Data points for 2020}
+	\label{tab:myt1}
+\end{table}
+\begin{table}%[ht] or say [H]
+	\centering
+	\begin{tabular}{cccccc}\hline % each column is centered (else could have left aligned [l] or right [r])
+		\toprule			
+		Label & Q1 2021 & Q2 2021 & Q3 2021 \\
+		\midrule
+		Penetration Rate & 55\% & 55\% & 55\% \\
+		\:\: Revenue per Passing & $94.90 & $96.89 & $99.04 \\
+		\:\: Cost to Service Customer Per Capita & $33.66 & $33.91 & $35.07 \\
+		\:\: Other Costs Per Passing & $41.14 & $41.44 & $42.86 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Data points for 2021}
+	\label{tab:myt1}
+\end{table}
 \end{appendices}
 \end{document}
