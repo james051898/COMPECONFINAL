@@ -17,6 +17,7 @@
 \usepackage{natbib}								% references
 \usepackage{setspace}							% single, 1.5, double spacing
 \usepackage{url}									% like hyperref
+\usepackage[euler]{textgreek}
 
 %%%% Make some adjustments to the document
 
@@ -54,7 +55,7 @@
 \end{singlespacing}
 
 \section{Introduction}
-The shift to remote work has increased the need for network connectivity and is
+\:\:\:\:\:\: The shift to remote work has increased the need for network connectivity and is
 beginning to commoditize network services. Consequently, federal and state agencies have taken
 an interest in the industry. Moreover, alternative conduits for broadband connection present a
 market ripe for disruption through innovation. For example, Elon Musk’s company Starlink may
@@ -86,78 +87,151 @@ presence and brings to the light pressing need to increase penetration rates.
 
 Data is described in appendix~\ref{app:dat}. \textit{This is in italics} and \textbf{this is in bold}.
 
-\section{Model}
+\section{Models}
+\subsection{Optimal Monetary Policy Model}
 
-Here is an example of an equation:
+\:\:\:\:\:\:\:\:Consider a monetary authority who wishes to control the nominal interest rate  \emph{x} to minimize the variation of the inflation rate s\textsubscript{1} + the GDP gap s\textsubscript{2} around specified targets s\textsuperscript{*}\textsubscript{1} and s\textsuperscript{*}\textsubscript{1}.
 
 \begin{equation}
-y_t = \beta_0 + \beta_1x_{1,t} + \beta_2x_{1,t}^2 + \beta_3x_{2,t} + u_t	\quad (t=1,\ldots,T)
-\label{eq:mye1}
+	L(s) = ½(s-s^{*})^{T}\Omega(s-s^{*})
+	\label{eq:mye1}
+\end{equation} 
+The corresponding state transition function is: 
+
+\begin{equation}
+\begin{aligned}
+	g(s,x,\epsilon) = \alpha + \Beta \gamma x + \epsilon
+	\label{eq:myeq2} 
+\end{aligned}\end{equation}
+\begin{equation*}
+s \subseteq \mathbb{R}^{2} \:\:\:	
+x \subseteq [0, \infty)
+\end{equation*}
+
+Where s is a 2x1 vector containing the inflation rate and the GDP gap, s* is a 2x1 vector of targets, and Ω is a 2 x 2 constant positive definite matrix of preference weights. 
+\begin{equation*} % stars * suppress labels / numbers appearing
+	\bm{s^{*}} = 
+	\left\begin{bmatrix}
+	0	\\
+	1	\\
+	\end{bmatrix}\right
+	\:
+	\:
+	\bm{\Omega} = 
+	\left\begin{bmatrix}
+	0.3	&	0.0\\
+	0.0	&	1.0\\
+	\end{bmatrix}\right
+\end{equation*}
+
+Assume that the inflation rate and the GDP gap are a joint controlled exogenous linear Markov process.
+
+\begin{equation}
+	s_{t+1}= \alpha+\beta s_{t}+\gamma x_{t}+\epsilon_{t+1} 
+	\label{eq:mye3}
 \end{equation}
 
-I refer to equation~\eqref{eq:mye1}, which is a basic equation where $u_t \sim \mathcal{N}(0,\sigma^2)$ is the error term that is an \textit{iid} Normal disturbance with mean zero and standard deviation $\sigma$ (variance is $\sigma^2$).\footnote{This is a footnote.} Letting $\bm{y}=(y_1,\ldots,y_T)^T$, $\boldsymbol{\beta}\equiv(\beta_0,\beta_1,\beta_2,\beta_3)^T$, $\bm{u}=(u_1,\ldots,u_T)^T$ and $\bm{X}$ be the \textit{data} matrix
-\begin{equation*} % stars * suppress labels / numbers appearing
-\bm{X} = 
-\begin{bmatrix}
-1				&	x_{1,1}	&	x_{1,1}^2	& x_{2,1}	\\
-1				&	x_{1,2}	&	x_{1,2}^2	& x_{2,2}	\\
-\vdots	&	\vdots	&	\vdots		&	\vdots	\\
-1				&	x_{1,T}	&	x_{1,T}^2	&	x_{2,T}
-\end{bmatrix}
-\end{equation*}
-we can re-express equation~\eqref{eq:mye1} in matrix form as
+Where \textalpha \: and \textGamma \: are 2 × 1 constant vectors, \textbeta \: is a 2 × 2 constant matrix, and \textepsilon \: is a 2 × 1 random vector with zero mean. 
+
 \begin{equation*}
-\bm{y} = \bm{X}\bm{\beta} + \bm{u}
-\end{equation*}
+	\bm{\alpha} =
+	\left\begin{bmatrix}
+		0.3	&	0.0\\
+		0.0	&	1.0\\
+	\end{bmatrix} \right\:
+	\: \bm{\beta} =      
+	\left\begin{bmatrix}
+	0.3	&	0.0\\
+	0.0	&	1.0\\
+	\end{bmatrix} \right
+	\: \bm{\Gamma} =
+	\begin{bmatrix}
+		0	\\
+		1	\\
+	\end{bmatrix}\right
+	\:
+	\:
+	\bm{\epsilon} = 
+	\left\begin{bmatrix}
+	0.04 &	0.00\\
+	0.00 &	0.04\\
+	\end{bmatrix}\right
+  \end{equation*}
 
+  To formulate as a maximization problem, posit reward function equaling negative loss function
+  \begin{equation*}
+	  f(s, x) = -L(s)
+  \end{equation*}
+  
+  The sum of current and expected future rewards satisfies the Bellman equation.
+  \begin{equation}
+	  V(s) = \max\limits_{0 \leq x }{-L(s)\epsilonV(g(s,x,\epsilon))}
+	  \label{eq:myeq3}
+  \end{equation}
+  
+  Given the model structure, one cannot omit the possibility that x <=0 will bind in certain states.
+  Therefore, the shadow-price function λ(s) characterized by Euler conditions:
+  \begin{equation}
+	  \delta \lambda^{T} E_{\epsilon} (g(s, x, \epsilon)) =  \mu
+  \end{equation*}
+  \begin{equation}
+	  \lambda(s) = -\Omega(s_{t}-s^{*}) + \delta \beta^{T}E_{\epsilon} \lambda (g(s,x,\epsilon))
+  \end{equation*}
+  
+  The Shadow price function represents the value of the Lagrange multiplier. Therefore, in the context of this problem, the shadow price function is the change in the optimal value per unit of infinitesimal change in the constraints (nominal interest rate and inflation variation). 
+  
+  It follows that along the optimal path
+  \begin{equation}
+	  \delta \gamma TE_{t} \lambda_{t+1} = \mu_{t}
+  \end{equation}
+  \begin{equation}
+	  \lambda_{t} = -\omega(s_{t}-s^{*})+\delta \beta^{T}E_{t} \lambda_{t}+1
+  \end{equation}
+  \begin{equation*}
+	x_{t}\geq 0 \mu_{t} \leq 0 x_{t}>0 ==> u_{t} - 0
+  \end{equation*}
+  Thus, in any period, nominal interest rate x is reduced until either the long-run marginal reward  µ or the nominal interest rate is driven to zero. 
+  
+  \subsection{Entry Exit Model}
+  \:\:\:\:\:\: Consider a market participant that operates in an uncertain profit environment. That market participant is a firm operating in the cable industry. 
+  The firm is either producing nothing or it is actively producing \emph{q} units of a good per period at a cost of \emph{c}. 
+  This is charaterized by the binary state \textdelta (\textdelta =0 for inactive, \textdelta =1 for active), there is also an exogenous stochastic state representing the return per unit of output, \emph{P}, 
+  which is described by the following equation:
+  \begin{equation}
+	P_{t} = \mu (P)dt + \sigma(\emph{P})d \emph{z}
+\end{equation}
+	The firm faces fixed costs of activating and deactivating of I and E, with $I + E \ge 0$. The value function for any choice of a switching strategy is:
+	\begin{equation}
+	V(P_{0}) = E_{0}\[ \int_{\infty}^{0} [e^{-\emph{p}t}\delta_{t}(P_{t}-c)\,dt \ - \[ \sum_{i=1}^{\infty}(e^{-pt^{a}_{i}}I+e^{-pt^{d}_{i}}E)}] \]
+\end{equation}
+
+t\textsuperscript{a}\textsubscript{i} and t\textsuperscript{d}\textsubscript{i} are the times at which activation and deactivation occur.
+It is reasonable to assume that positive transition costs should be made infrequently. In addition, it is intuitively reasonable that the optimal strategy is to activate when P is sufficiently high, P = P\textsubscript{a}h}; 
+otherwise, infinite transaction costs would be incurred. Therefore, the value function is thought of as a pair of functions where on represents an active firm V\textsuperscript{a}, and one for when it is inactive, V\textsuperscript{i}.
+The former is defined on the interval [P\textsubscript{l}, $\infty$), the latter on the interval [0, P\textsubscript{h}]. On the interior of these regions, the value functions satisfy the Feynman-Kac equations:
+\begin{equation}
+	pV^{a} = P - c + \mu(P)V^{a}_{P} + \sigma^2(P)V^{i}_{PP}
+\end{equation}
+\begin{equation}
+	pV^{i} = \mu(P)V^{i}_{P} + \sigma^2(P)V^{i}_{PP}
+\end{equation}
+
+At the upper boundary point P\textsubscript{h} the firm will enter the market and become active at a cost of I. 
+This is enforced by the value functions which require the switching cost to reach equality: V\textsuperscript{i}(P\textsubscript{h})= V\textsuperscript{a}(P\textsubscript{h}) - I.
+At the point P\textsubscript{l} when the firm changes from an active to an inactive state, the value function requires: V\textsuperscript{a}(P\textsubscript{l})= V\textsuperscript{i}(P\textsubscript{l}) - E.
+
+The value matching functions holds when considering arbitrary choices of P\textsubscript{l} and P\textsubscript{h}. However, optimal choices must satisfy the smooth-pasting conditions as follows:
+\begin{equation}
+		V^{i}(P_{l}=V^{a}_{P}(P_{l}))
+	\end{equation}
+\begin{equation}
+		V^{i}(P_{h}=V^{a}_{P}(P_{h}))
+	\end{equation}
+Due to the nature of the cable industry and the necessity of connectivity, exit is irreversible and its cost is as expensive as the initial investment.
 \section{Results}\label{sec:res}
-
-I present results in table~\ref{tab:myt1} and figure~\ref{fig:myf1}. Note that I can control the placement of these `floats' using commands [ht] or [H] where the former specifies the float should be placed [h]ere or on [t]op of the page, if \LaTeXe{} thinks it might be ok, while [H] is a more forceful command to place it [H]ere! Use [H] (and [ht]) with caution -- \LaTeXe{} is like a publisher, e.g. Oxford University Press and is designed to take your document and make it look good with its standard setup. Once you start adjusting these settings be prepared for (a) possibly worse looking documents and (b) a lot of hard work tinkering with the code; adjusting the basic settings is a more advanced topic.
-
-% I use {} after \LaTeXe because otherwise there is no space inserted before the next word
-
-\begin{table}%[ht] or say [H]
-\centering
-\begin{tabular}{ccc} % each column is centered (else could have left aligned [l] or right [r])
-\toprule			
-			&	Age	& Income			\\
-\midrule
-John	&	24	&	\EUR{35,000}	\\
-Mary	& 32	& \EUR{70,000}	\\
-Joe		& 64	& \EUR{45,000}	\\
-\bottomrule
-\end{tabular}
-\caption{This is a table.}
-\label{tab:myt1}
-\end{table}
-
-\begin{figure}%[ht] or say [H]
-% LaTeX is like a publisher e.g. Oxford Publishing: it gives a standard look to documents that is `pretty'; if you start adjusting the way LaTeX produces your document, be prepared for (a) possibly less nice looking results and / or (b) a little bit of trouble before you get it correct in the coding; adjusting the outpuf of LaTeX is a more advanced topic.
-\includegraphics[width=\columnwidth]{img/ps1q20aNice}
-\caption{This is a figure.}
-\label{fig:myf1}
-\end{figure}
-
-\subsection{Subsection Title 1}\label{sec:ssres}
-
-This is an example of a subsection.
-
-\subsection{Subsection Title 2}
-
-This is another example of a subsection.
-
-\subsubsection{Subsubsection Title}\label{sec:sssres}
-
-This is an example of a subsubsection. If you open the pdf version in say \texttt{Adobe (typewriter text)}, you will see that you can open up the results section into two subsections and you can open the second subsection into a subsubsection. Here is an example of a web link: \url{http://scholar.princeton.edu/sites/default/files/01b\%20EuroCrashCourse_slides_0.pdf}.\footnote{Note that I had to put the $\backslash$ before $\%$ so \LaTeXe{} would not interpret $\%$ as a comment.} And  \htmladdnormallink{here}{http://www.michael-curran.com/teaching/teaching.html} is an another example of a web link that hides the link name.
-
 \section{Conclusion}
-
-\lipsum
-
 \bibliographystyle{ecca}
 \bibliography{myrefs}
-
-%\newpage 					% use this if you want a pagebreak e.g. between references and appendices - or you can use \pagebreak
 
 \begin{appendices}
 

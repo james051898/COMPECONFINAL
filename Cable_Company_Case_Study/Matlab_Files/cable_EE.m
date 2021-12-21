@@ -25,8 +25,10 @@ Entry barrier is exbortitantly high
   mu    = 0; 
   sigma = 0.2; 
   C     = 1; 
-  E     = 2;
-  I     = 5; 
+  E     = 2; % Exit cost
+  I     = 5; % fixed cost
+% return stream of P - c
+% the price process is geometric Brownian motion
 
 % Pack model structure
   clear model
