@@ -1,4 +1,4 @@
-function out=Entry_Exit_Model_With_Comments(flag,s,x,r,mu,sigma,C,E,I)
+function out=mfrs(flag,s,x,r,mu,sigma,C,E,I)
   switch flag
   case 'f'
     out=(s-C).*(x==2);
