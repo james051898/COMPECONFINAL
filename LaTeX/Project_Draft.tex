@@ -5,6 +5,7 @@
 
 % declare packages:
 
+\usepackage{amsmath}
 \usepackage{amsfonts,amsmath,amsthm}			% standard ams packgages
 \usepackage[title,titletoc,toc]{appendix} % Appendix package. Not necessary, but it does make managing appendices easier
 \usepackage{bm}										% bold maths symbols shorter definition: \bm{}
@@ -19,6 +20,8 @@
 \usepackage{url}									% like hyperref
 \usepackage[euler]{textgreek}
 \usepackage{rotating}
+\usepackage{{xcolor}
+\newcommand\myworries[1]{\textcolor{red}{#1}}
 %%%% Make some adjustments to the document
 
 % change from singlespace to onehalfspace to doublespace
@@ -59,7 +62,7 @@
 	\:\:\:\:\:\: The shift to remote work has increased the need for network connectivity and is
 	beginning to commoditize network services. Consequently, federal and state agencies have taken
 	an interest in the industry. Moreover, alternative conduits for broadband connection present a
-	market ripe for disruption through innovation. For example, Elon Musk’s company Starlink may
+	market ripe for disruption through innovation. For example, Elon Musk's company Starlink may
 	be able to offer more affordable internet access to customers in rural areas. Starlink uses
 	advanced satellites in a low orbit to provide low latency broadband internet access across the
 	globe. The development and implementation of 5G may further dampen Cable Company profits,
@@ -71,7 +74,7 @@
 	an extremely tight labor market. According to the NFIB, 51\% of small business owners reported
 	job openings they could not fill in September 2021. This is a record high and is up one point
 	from the previous month. (“Jobs Report and Jobs Data from the NFIB Small Business Research
-	Center”, n.d.) It seems likely that the FED’s hand will be forced and interest rates will rise as a
+	Center”, n.d.) It seems likely that the FED's hand will be forced and interest rates will rise as a
 	function of inflation.
 
 	The relative cost and quality of broadband internet access in the United States poses
@@ -110,21 +113,23 @@ Now consider a new cable company entering the market at time t\textsubscript{new
 \begin{equation}
 	\pi_{t_{new}} = \emph{rev} * \emph{pen} - (C_{f}+C_{v})
 \end{equation}
+Assuming all else equal, the fixed cost for the new cable company is adjusted to the new interest rate.
+
 \subsection{Optimal Monetary Policy Model}
 
 \:\:\:\:\:\:\:\:Consider a monetary authority who wishes to control the nominal interest rate  \emph{x} to minimize the variation of the inflation rate s\textsubscript{1} + the GDP gap s\textsubscript{2} around specified targets s\textsuperscript{*}\textsubscript{1} and s\textsuperscript{*}\textsubscript{1}.
 
 \begin{equation}
-	L(s) = ½(s-s^{*})^{T}\Omega(s-s^{*})
+	L(s) = 0.5(s-s^{*})^{T}\Omega(s-s^{*})
 	\label{eq:mye1}
 \end{equation} 
 The corresponding state transition function is: 
 
 \begin{equation}
-\begin{aligned}
-	g(s,x,\epsilon) = \alpha + \Beta \gamma x + \epsilon
-	\label{eq:myeq2} 
-\end{aligned}\end{equation}
+	g(s,x,\epsilon) = \alpha + \beta \gamma x + \epsilon
+	\label{eq:myeq2}
+\end{equation} 
+
 \begin{equation*}
 s \subseteq \mathbb{R}^{2} \:\:\:	
 x \subseteq [0, \infty)
@@ -133,17 +138,19 @@ x \subseteq [0, \infty)
 Where s is a 2x1 vector containing the inflation rate and the GDP gap, s* is a 2x1 vector of targets, and Ω is a 2 x 2 constant positive definite matrix of preference weights. 
 \begin{equation*} % stars * suppress labels / numbers appearing
 	\bm{s^{*}} = 
-	\left\begin{bmatrix}
-	0	\\
-	1	\\
-	\end{bmatrix}\right
-	\:
-	\:
+		\left.
+			\begin{bmatrix}
+				0	\\
+				1	\\
+			\end{bmatrix}
+		\right.
 	\bm{\Omega} = 
-	\left\begin{bmatrix}
-	0.3	&	0.0\\
-	0.0	&	1.0\\
-	\end{bmatrix}\right
+		\left.
+			\begin{bmatrix}
+				0.3	&	0.0\\
+				0.0	&	1.0\\
+			\end{bmatrix}
+		\right.
 \end{equation*}
 
 Assume that the inflation rate and the GDP gap are a joint controlled exogenous linear Markov process.
@@ -157,28 +164,34 @@ Where \textalpha \: and \textGamma \: are 2 × 1 constant vectors, \textbeta \: 
 
 \begin{equation*}
 	\bm{\alpha} =
-	\left\begin{bmatrix}
-		0.3	&	0.0\\
-		0.0	&	1.0\\
-	\end{bmatrix} \right\:
-	\: \bm{\beta} =      
-	\left\begin{bmatrix}
-	0.3	&	0.0\\
-	0.0	&	1.0\\
-	\end{bmatrix} \right
-	\: \bm{\Gamma} =
-	\begin{bmatrix}
-		0	\\
-		1	\\
-	\end{bmatrix}\right
-	\:
-	\:
+		\left.
+			\begin{bmatrix}
+				0.3	&	0.0\\
+				0.0	&	1.0\\
+			\end{bmatrix} 
+		\right.
+	\bm{\beta} =      
+		\left.
+			\begin{bmatrix}
+				0.3	&	0.0\\
+				0.0	&	1.0\\
+			\end{bmatrix} 
+		\right.
+	\bm{\Gamma} =
+		\left.
+			\begin{bmatrix}
+				0	\\
+				1	\\
+			\end{bmatrix}
+		\right.
 	\bm{\epsilon} = 
-	\left\begin{bmatrix}
-	0.04 &	0.00\\
-	0.00 &	0.04\\
-	\end{bmatrix}\right
-  \end{equation*}
+		\left.
+			\begin{bmatrix}
+				0.04 &	0.00\\
+				0.00 &	0.04\\
+			\end{bmatrix}
+		\right.
+\end{equation*}
 
   To formulate as a maximization problem, posit reward function equaling negative loss function
   \begin{equation*}
