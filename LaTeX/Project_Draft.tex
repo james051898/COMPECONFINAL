@@ -260,6 +260,7 @@ Where \textalpha \: and \textGamma \: are 2 × 1 constant vectors, \textbeta \: 
 
 \subsection{Profit Model}
 
+\subsubsection{Standard Profit Equation}
 \:\:\:\:\:\: Consider a profit model for a cable company that is defined by internet revenue per passing less two costs bases: \emph{C\textsubscript{f}} and \emph{C\textsubscript{v}}. 
 \emph{C\textsubscript{f}} represents the fixed average customer per customer and \emph{C\textsubscript{v}} represents the variable average cost per customer. 
 Additional information about financial calcuations is provided in the appendix. 
@@ -275,8 +276,36 @@ Now consider a new cable company entering the market at time t\textsubscript{new
 \end{equation}
 Assuming all else equal, the fixed cost for the new cable company is adjusted to the new interest rate.
 
-\subsection{Entry Exit Model with capacity choice}
+\subsubsection{Demand Equation}
+Now consider a demand function that defines a functional relationship between penetration rate and cost to customer per passing.
+Let Q equal estimated passings (the estimated number of customers that it can provide services for).
+Let C be the per-acre variable costs of operation (C) which are known and constant.
+\begin{equation}
+	P = Y - bQ
+\end{equation}
+	Where Y is the stochastic variable and \emph{b} is the constant slope. The variable Y follows a geometric Brownian motion represented by:
+\begin{equation}
+	dY = \alpha Y dt + \sigma Y dz
+\end{equation}
+	\textalpha is the drift parameter or in other words, the growth rate of Y, \textsigma is the standard deviation in the drift, and dz the increment of the Weiner process.
 
+\subsubsection{Short Run Profit Model for Entry and Exit}
+	Estimated passings are determined by the stock of capital and \myworries{INTEREST RATE ENVIRONMENT},
+	Q = G(K); \:\:\:\:\:\: Q > G'(K); \:\:\:\:\:\: Q < G'(K);
+	Therefore, the profit of the firm is given by:
+
+\begin{equation}
+	\pi = [Y - bG(k)-C]G(K)
+\end{equation}
+\subsection{Entry and Exit Strategies}
+	The model herein is an expansion of the models of Dixit (1989) and Dixit and Pindyck (1994). 
+The exapnsion was created by lsik (2003) for Agricultural Economics, however, it is generally applicable to the network service provider industry.
+\begin{equation}
+	% -A(Y^O_H)^{\beta_1} + B(Y^O_H)^{\beta_2}+G(K_0) x \bigg( \[\frac{Y^O_H}{\emph{p}-\alpha} \] - \[\frac{bG(K)+C}{\emph{p}}\]	\bigg) = K_0
+	-A(Y^O_H)^{\beta_1} + B(Y^O_H)^{\beta_2}  + G(K_0) x \bigg(                           \bigg)
+\end{equation}
+
+\cite{Cap_Choice}
 \section{Results}\label{sec:res}
 	\section{Conclusion}
 \bibliographystyle{ecca}
@@ -354,5 +383,10 @@ Assuming all else equal, the fixed cost for the new cable company is adjusted to
 	\caption{Approximation Residuals}
 	\label{fig:myf4}
 \end{figure}
+
+\pagebreak
+\bibliographystyle{ecca}
+\bibliography{newrefs}
+
 \end{appendices}
 \end{document}
