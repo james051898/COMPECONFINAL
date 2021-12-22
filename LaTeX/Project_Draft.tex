@@ -100,25 +100,25 @@
 
 \section{Literature Review}
 
-\:\:\:\:\:\:The inspiration for this paper arises from the success of the Rural Electrification Act. 
-The Rural Electrification Administration provided low-interest loans in the 1930s to cooperatives to lay distribution lines to farms and aid in wiring homes. 
+\:\:\:\:\:\:The inspiration for this paper arises from the success of the Rural Electrification Act which provided low-interest loans in the 1930s to cooperatives to lay distribution lines to farms and aid in wiring homes. 
 Kitchens and Fishback found that the number of electrified rural homes doubled in the United States within five years of the program's beginning. 
-In addition, they found that Rural Electrification Administration loans contributed significantly to increases in crop output and productivity. 
-Similarly, Tim Sablak notes that virtually all rural Americans had access to power within a 20- to 25-year period. 
+Their work suggets that REA loans contributed significantly to increases in crop output and productivity. 
+Similarly, Tim Sablak notes that virtually all rural Americans had access to power within a 20- to 25-year period of the program's inception. 
 In addition, almost all REA loans were repaid given that the default rate was less than 1 percent.
 
-The expansion of broadband internet access strongly resembles the deployment of electricity in the 1920s. 
-The lack of return for private investors in rural areas is present in the current broadband market and was present in electricity deployment 100 years ago. 
+The expansion of broadband internet access strongly resembles the deployment of electricity in the 1920s.
+The digital divide that deprvies rural Americans adequate access to broadband internet closely parallels the digital divide present in electricity deployment 100 years ago.
+The private markets failed to provide an adequate incentive in rural areas for both industries. Nonetheless, both sectors witnessed tremendous growth. 
 By 1929, five holding companies controlled 80 percent of the electrical generating capacity of the nation. 
-The electrical industry grew by 244 percent, from \$ 882 million in 1920 to \$ 2155 million in 1929. 
+The electrical industry grew by 244 percent, from \$ 882 million in 1920 to \$ 2155 million in 1929. \myworries{PLEASE INCLUDE INFORMATION ABOUT ISP MONOPOLIES}
 Similarly, the five key industry players in the broadband industry (Altice USA, Cable One, Charter Communications, Comcast and Cox Communications) have averaged a 25 percent return on invested capital.  
 While broadband internet service providers are not as consolidated as electric companies, they certainly exert tremendous monopoly power through regional monopolies as indicated by Ferguson's “The U.S. Broadband Problem”, Krugman's “Barons of Broadband” and many others.
 
-One key issue with existing economic literature is that it is very difficult to pinpoint how internet service providers are creating social costs. 
+One key issue with existing economic literature is that it is very difficult to pinpoint how monopolistic internet service providers are creating social costs. 
 Using a fixed-effect disequilibrium broadband penetration model and OECD country broadband subscription data, W.J. Mayer et al, concluded that broadband markets are potentially (likely) in disequilibrium. 
 Similarly, Gruber and Koutroumpis conducted an analysis of different regulatory interventions on broadband diffusion. 
 Their findings assert that reducing market power of incumbents increases the speed of broadband diffusion. 
-However, the results assert that the diffusion effect from regulatory access dissipates after 3-4 years. 
+However, the results also find that the diffusion effect from regulatory access dissipates after 3-4 years. 
 Moreover, it does not take into account the quality of broadband access. 
 
 The government policy responses to promote competition amongst network providers have been ineffective so far. 
@@ -126,6 +126,7 @@ Pindyk challenged the efficacy of the Telecommunications Act of 1996 citing that
 More specifically, by forcing incumbents to share their network capital with new entrants, new investment is deterred by uncertainty of future demand at the entry price. 
 Despite this, some empirical evidence suggests that this is not the case for all circumstances. 
 More specifically, there is evidence to support that an appropriately specified access price can reduce social costs.
+Nonetheless, political uncertainty remains.
 
 Broadband internet industry dynamics are highly uncertain due to innovation, regulatory risks and economic uncertainty. 
 Meijer et al. touch on the technological uncertainties created by the characteristics of new technology, adaptations to infrastructure and alternative technologies. 
@@ -283,11 +284,12 @@ Where \textalpha \: and \textGamma \: are 2 × 1 constant vectors, \textbeta \: 
 \end{equation}
 	The firm faces fixed costs of activating and deactivating of I and E, with $I + E \ge 0$. The value function for any choice of a switching strategy is:
 	\begin{equation}
-	V(P_{0}) = E_{0}\[ \int_{\infty}^{0} [e^{-\emph{p}t}\delta_{t}(P_{t}-c)\,dt \ - \[ \sum_{i=1}^{\infty}(e^{-pt^{a}_{i}}I+e^{-pt^{d}_{i}}E)}] \]
+	V(P_{0}) = E_{0} \bigg[ \int_\infty^0\! e^{-\emph{pt}} \delta_t (P_t-c) \, \mathrm{dt} -  \sum_{i=1}^{\infty} e^{-pt^{a}_{i}} I +e^{-pt^d_i} E \bigg]
 \end{equation}
+% \[ \int_{\infty}^{0} [e^{-\emph{p}t}\delta_{t}(P_{t}-c)\,dt \ - \[ \sum_{i=1}^{\infty}(e^{-pt^{a}_{i}}I+e^{-pt^{d}_{i}}E)}] \]
 
 t\textsuperscript{a}\textsubscript{i} and t\textsuperscript{d}\textsubscript{i} are the times at which activation and deactivation occur.
-It is reasonable to assume that positive transition costs should be made infrequently. In addition, it is intuitively reasonable that the optimal strategy is to activate when P is sufficiently high, P = P\textsubscript{a}h}; 
+It is reasonable to assume that positive transition costs should be made infrequently. In addition, it is intuitively reasonable that the optimal strategy is to activate when P is sufficiently high, P = P\textsubscript{a}h; 
 otherwise, infinite transaction costs would be incurred. Therefore, the value function is thought of as a pair of functions where on represents an active firm V\textsuperscript{a}, and one for when it is inactive, V\textsuperscript{i}.
 The former is defined on the interval [P\textsubscript{l}, $\infty$), the latter on the interval [0, P\textsubscript{h}]. On the interior of these regions, the value functions satisfy the Feynman-Kac equations:
 \begin{equation}
@@ -301,7 +303,8 @@ At the upper boundary point P\textsubscript{h} the firm will enter the market an
 This is enforced by the value functions which require the switching cost to reach equality: V\textsuperscript{i}(P\textsubscript{h})= V\textsuperscript{a}(P\textsubscript{h}) - I.
 At the point P\textsubscript{l} when the firm changes from an active to an inactive state, the value function requires: V\textsuperscript{a}(P\textsubscript{l})= V\textsuperscript{i}(P\textsubscript{l}) - E.
 
-The value matching functions holds when considering arbitrary choices of P\textsubscript{l} and P\textsubscript{h}. However, optimal choices must satisfy the smooth-pasting conditions as follows:
+The value matching functions holds when considering arbitrary choices of P\textsubscript{l} and P\textsubscript{h}. 
+However, optimal choices must satisfy the smooth-pasting conditions as follows:
 \begin{equation}
 		V^{i}(P_{l}=V^{a}_{P}(P_{l}))
 	\end{equation}
@@ -309,6 +312,9 @@ The value matching functions holds when considering arbitrary choices of P\texts
 		V^{i}(P_{h}=V^{a}_{P}(P_{h}))
 	\end{equation}
 Due to the nature of the cable industry and the necessity of connectivity, exit is irreversible and its cost is as expensive as the initial investment.
+
+\subsection{Entry Exit Model Two}
+
 \section{Results}\label{sec:res}
 	\section{Conclusion}
 \bibliographystyle{ecca}
