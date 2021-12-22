@@ -18,12 +18,12 @@
 \usepackage{natbib}								% references
 \usepackage{setspace}							% single, 1.5, double spacing
 \usepackage{url}									% like hyperref
-\usepackage[euler]{textgreek}
+\usepackage[euler{textgreek}
 \usepackage{rotating}
-\usepackage{{xcolor}
+\usepackage{xcolor}
 %%%% Make some adjustments to the document
-
 \newcommand\myworries[1]{\textcolor{red}{#1}}
+
 % change from singlespace to onehalfspace to doublespace
 %\singlespace
 \onehalfspace
@@ -157,7 +157,7 @@ Additional information about financial calcuations is provided in the appendix.
 The corresponding state transition function is: 
 
 \begin{equation}
-	g(s,x,\epsilon) = \alpha + \beta \gamma x + \epsilon
+	g(s,x,\epsilon) = \alpha + \beta s + \gamma x + \epsilon
 	\label{eq:myeq2}
 \end{equation} 
 
@@ -191,7 +191,7 @@ Assume that the inflation rate and the GDP gap are a joint controlled exogenous 
 	\label{eq:mye3}
 \end{equation}
 
-Where \textalpha \: and \textGamma \: are 2 × 1 constant vectors, \textbeta \: is a 2 × 2 constant matrix, and \textepsilon \: is a 2 × 1 random vector with zero mean. 
+Where \textalpha \: and \textGamma \: are 2 \times 1 constant vectors, \textbeta \: is a 2 x 2 constant matrix, and \textepsilon \: is a 2 x 1 random vector with zero mean. 
 
 \begin{equation*}
 	\bm{\alpha} =
@@ -231,22 +231,21 @@ Where \textalpha \: and \textGamma \: are 2 × 1 constant vectors, \textbeta \: 
   
   The sum of current and expected future rewards satisfies the Bellman equation.
   \begin{equation}
-	  V(s) = \max\limits_{0 \leq x }{-L(s)\epsilonV(g(s,x,\epsilon))}
+	V(s) = \max\limits_{{0 \leq x}} [ - L(s) + \delta E_{\epsilon}V(g(s,x,\epsilon))]
 	  \label{eq:myeq3}
   \end{equation}
   
   Given the model structure, one cannot omit the possibility that x <=0 will bind in certain states.
   Therefore, the shadow-price function λ(s) characterized by Euler conditions:
-  \begin{equation}
-	  \delta \lambda^{T} E_{\epsilon} (g(s, x, \epsilon)) =  \mu
-  \end{equation*}
-  \begin{equation}
-	  \lambda(s) = -\Omega(s_{t}-s^{*}) + \delta \beta^{T}E_{\epsilon} \lambda (g(s,x,\epsilon))
-  \end{equation*}
+\begin{equation}
+    \delta \lambda^{T} E_{\epsilon} (g(s, x, \epsilon)) =  \mu
+\end{equation}
+\begin{equation}
+	\lambda(s) = -\Omega(s_{t}-s^{*}) + \delta \beta^{T}E_{\epsilon} \lambda (g(s,x,\epsilon))
+\end{equation}
   
-  The Shadow price function represents the value of the Lagrange multiplier. Therefore, in the context of this problem, the shadow price function is the change in the optimal value per unit of infinitesimal change in the constraints (nominal interest rate and inflation variation). 
-  
-  It follows that along the optimal path
+The Shadow price function represents the value of the Lagrange multiplier. Therefore, in the context of this problem, the shadow price function is the change in the optimal value per unit of infinitesimal change in the constraints (nominal interest rate and inflation variation). 
+It follows that along the optimal path:
   \begin{equation}
 	  \delta \gamma TE_{t} \lambda_{t+1} = \mu_{t}
   \end{equation}
@@ -291,12 +290,13 @@ Let C be the per-acre variable costs of operation (C) which are known and consta
 
 \subsubsection{Short Run Profit Model for Entry and Exit}
 \:\:\:\:\:\:	Estimated passings are determined by the stock of capital and \myworries{INTEREST RATE ENVIRONMENT},
-	Q = G(K); \:\:\:\:\:\: Q \textgreater G'(K); \:\:\:\:\:\: Q \textless G'(K);
+	Q = G(K); \:\:\:\:\:\: Q \textgreater G'(K); \:\:\:\:\:\: Q \textless G''(K);
 	Therefore, the profit of the firm is given by:
-
 \begin{equation}
 	\pi = [Y - bG(k)-C]G(K)
 \end{equation}
+
+The marginal revenue product of capital is \begin{equation}G'(K)[Y-2bG(K)-C]\end{equation}
 \subsubsection{Entry and Exit Strategies}
 	The model herein is an expansion of the models of Dixit (1989) and Dixit and Pindyck (1994). 
 The expansion was created by lsik (2003) for Agricultural Economics, however, it is generally applicable to the network service provider industry.
@@ -314,10 +314,27 @@ The expansion was created by lsik (2003) for Agricultural Economics, however, it
 		-\beta_1 A (Y^O_L)^{\beta_1-1} + -\beta_2 B (Y^O_L)^{\beta_2-1}  + \frac{G(K_0)}{\emph{p}-\alpha} = 0
 	\end{split}
 \end{equation}
-Where B and A are constants to be determined, Y\textsuperscript{O}\textsubscript{H}
+Where B and A are constants to be determined, Y\textsuperscript{O}\textsubscript{L}, the entry threshold for the demand variable, Y\textsuperscript{O}\textsubscript{H} the exit threshold for the demand variable, and 
 \cite{Cap_Choice}
 \section{Results}\label{sec:res}
-	\section{Conclusion}
+\subsection{Optimal Monetary Policy}
+\:\:\:\:\:\: The Optimal Monetary Policy model is tested using an 100-function bivariate cubic spline basis on the square where s\textsubscript{1} and s\textsubscript{2} are values ranging from -15 to 10. 
+The cubic spline basis is then constructed by forming then tensor products of 10 univariate cubic B-spline basis functions in addtion to an 100 node collocation grid.
+Linear quadratic approximation values and actions are used to initialize the collocation algorithm. 
+Finally, dpsolve is used to solve the collocation equation using Newton's method.
+
+The postoptimality analysis reveals that the GDP gap and the underlying inflation can determine the optimal nominal interest. 
+This is is indicated in the "Optimal Monetary Policy" figure. 
+The residual becomes quite large around the nonnegativity constraint and may not accurately represent the optimal nominal interest rate near zero.
+Despite this, the overall residuals are relatively small elsewhere.
+
+With Facker et al's CompEcon Toolbox, the routine dpsimul was used to simulate the model 5,000 times over a 20-year period starting from an initial GDP gap of 15\% and inflation rate of 10\%.
+The GDP Gap expected state path drops quite quickly and steadys out in the long run. 
+However, the expected state path for the inflation rate takes much longer to return to normalcy.
+Given recent inflation scares, these findings demonstrate the reality of an economic downturn in the near future.
+
+\subsection{Entry Exit Model}
+
 \bibliographystyle{ecca}
 	\bibliography{myrefs}
 \begin{appendices}
@@ -327,14 +344,14 @@ Where B and A are constants to be determined, Y\textsuperscript{O}\textsubscript
 \pagebreak
 \begin{table}%[ht] or say [H]
 	\centering
-	\begin{tabular}{cccccc}\hline % each column is centered (else could have left aligned [l] or right [r])
-		\toprule			
+	\begin{tabular}{cccccc} 
+		\toprule
 		Label & Q1 2019 & Q2 2019 & Q3 2019 & Q4 2019 & FY 2019 \\
 		\midrule
 		Penetration Rate & 50\% & 50\% & 51\% & 51\% & 51\% \\
-		\:\: Revenue per Passing & $78.31 & $79.49 & $80.77 & $83.31 & $319.57 \\
-		\:\: Cost to Service Customer Per Capita & $35.46 & $34.23 & $36.47 & $34.40 & $139.53 \\
-		\:\: Other Costs Per Passing & $43.34 & $41.84 & $44.57 & $42.04 & $170.54 \\
+		Revenue per Passing & \$78.31 & \$79.49 & \$80.77 & \$83.31 & \$319.57 \\
+		Cost to Service Customer Per Capita & \$35.46 & \$34.23 & \$36.47 & \$34.40 & \$139.53 \\
+		Other Costs Per Passing & \$43.34 & \$41.84 & \$44.57 & \$42.04 & \$170.54 \\
 		\bottomrule
 	\end{tabular}
 	\caption{Data points for 2019}
@@ -342,18 +359,18 @@ Where B and A are constants to be determined, Y\textsuperscript{O}\textsubscript
 \end{table}
 \begin{table}%[ht] or say [H]
 	\centering
-	\begin{tabular}{cccccc}\hline % each column is centered (else could have left aligned [l] or right [r])
+	\begin{tabular}{cccccc} % each column is centered (else could have left aligned [l] or right [r])
 		\toprule			
-		Label & Q1 2020 & Q2 2020 & Q3 2020 & Q4 2020 & FY 2020 \\
+			Label & Q1 2020 & Q2 2020 & Q3 2020 & Q4 2020 & FY 2020 \\
 		\midrule
-		Penetration Rate & 52\% & 53\% & 54\% & 54\% & 54\% \\
-		\:\: Revenue per Passing & $84.07 & $85.94 & $89.06 & $91.22 & $347.49 \\
-		\:\: Cost to Service Customer Per Capita & $35.26 & $35.06 & $35.87 & $35.16 & $140.19 \\
-		\:\: Other Costs Per Passing & $43.09 & $42.85 & $43.84 & $42.97 & $171.34 \\
+			Penetration Rate & 52\% & 53\% & 54\% & 54\% & 54\% \\
+			Revenue per Passing & \$84.07 & \$85.94 & \$89.06 & \$91.22 & \$347.49 \\
+			Cost to Service Customer & \$35.26 & \$35.06 & \$35.87 & \$35.16 & \$140.19 \\
+			Other Costs Per Passing & \$43.09 & \$42.85 & \$43.84 & \$42.97 & \$171.34 \\
 		\bottomrule
 	\end{tabular}
 	\caption{Data points for 2020}
-	\label{tab:myt1}
+	\label{tab:myt2}
 \end{table}
 \begin{table}%[ht] or say [H]
 	\centering
@@ -361,27 +378,26 @@ Where B and A are constants to be determined, Y\textsuperscript{O}\textsubscript
 		\toprule			
 		Label & Q1 2021 & Q2 2021 & Q3 2021 \\
 		\midrule
-		Penetration Rate & 55\% & 55\% & 55\% \\
-		\:\: Revenue per Passing & $94.90 & $96.89 & $99.04 \\
-		\:\: Cost to Service Customer Per Capita & $33.66 & $33.91 & $35.07 \\
-		\:\: Other Costs Per Passing & $41.14 & $41.44 & $42.86 \\
+			Penetration Rate \& 55\% \& 55\% \& 55\% \\
+			Revenue per Passing & \$94.90 & \$96.89 & \$99.04 \\
+			Cost to Service Customer Per Capita & \$33.66 & \$33.91 & \$35.07 \\
+			Other Costs Per Passing & \$41.14 & \$41.44 & \$42.86 \\
 		\bottomrule
 	\end{tabular}
 	\caption{Data points for 2021}
-	\label{tab:myt1}
+	\label{tab:myt3}
 \end{table}
 
 \section{Figures}\label{app:figures}
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{img/Optimal_Monetary_Policy/OMP.png}
-	\caption{Approximation Residuals}
+	\caption{Monetary Policy Figures}
 	\label{fig:myf1}
 \end{figure}
 
 \pagebreak
 \bibliographystyle{ecca}
 \bibliography{newrefs}
-
 \end{appendices}
 \end{document}
