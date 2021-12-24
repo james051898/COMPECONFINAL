@@ -18,15 +18,15 @@
 \usepackage{natbib}								% references
 \usepackage{setspace}							% single, 1.5, double spacing
 \usepackage{url}									% like hyperref
-\usepackage[euler]{textgreek}
+\usepackage[euler{textgreek}
 \usepackage{rotating}
 \usepackage{xcolor}
 %%%% Make some adjustments to the document
-
 \newcommand\myworries[1]{\textcolor{red}{#1}}
+
 % change from singlespace to onehalfspace to doublespace
 %\singlespace
-\doublespace
+\onehalfspace
 %\doublespace
 
 % define title, author, etc.
@@ -146,23 +146,7 @@ The final dataset is adjusted to a per customer level so that the model can test
 Additional information about financial calcuations is provided in the appendix.
 
 \section{Models}
-\subsection{Profit Model}
-\:\:\:\:\:\: Consider a profit model for a cable company that is defined by internet revenue per passing less two costs bases: \emph{C\textsubscript{f}} and \emph{C\textsubscript{v}}. 
-\emph{C\textsubscript{f}} represents the fixed average customer per customer and \emph{C\textsubscript{v}} represents the variable average cost per customer. 
-Additional information about financial calcuations is provided in the appendix. 
-\begin{equation}
-	\pi_{t} = \emph{rev} * \emph{pen} - (C_{f}+C_{v})
-\end{equation}
-This equation represents the short run profit per quarter. 
-Due to significantly high fixed costs, \emph{C\textsubscript{f}} is to be paid each period and theoretically, represents required interest payments.
-
-Now consider a new cable company entering the market at time t\textsubscript{new}:
-\begin{equation}
-	\pi_{t_{new}} = \emph{rev} * \emph{pen} - (C_{f}+C_{v})
-\end{equation}
-Assuming all else equal, the fixed cost for the new cable company is adjusted to the new interest rate.
-
-\subsection{Optimal Monetary Policy Model} % See page 345
+\subsection{Optimal Monetary Policy Model}
 
 \:\:\:\:\:\:\:\:Consider a monetary authority who wishes to control the nominal interest rate  \emph{x} to minimize the variation of the inflation rate s\textsubscript{1} + the GDP gap s\textsubscript{2} around specified targets s\textsuperscript{*}\textsubscript{1} and s\textsuperscript{*}\textsubscript{1}.
 
@@ -173,7 +157,7 @@ Assuming all else equal, the fixed cost for the new cable company is adjusted to
 The corresponding state transition function is: 
 
 \begin{equation}
-	g(s,x,\epsilon) = \alpha + \beta \gamma x + \epsilon
+	g(s,x,\epsilon) = \alpha + \beta s + \gamma x + \epsilon
 	\label{eq:myeq2}
 \end{equation} 
 
@@ -207,7 +191,7 @@ Assume that the inflation rate and the GDP gap are a joint controlled exogenous 
 	\label{eq:mye3}
 \end{equation}
 
-Where \textalpha \: and \textGamma \: are 2 × 1 constant vectors, \textbeta \: is a 2 × 2 constant matrix, and \textepsilon \: is a 2 × 1 random vector with zero mean. 
+Where \textalpha \: and \textGamma \: are 2 \times 1 constant vectors, \textbeta \: is a 2 x 2 constant matrix, and \textepsilon \: is a 2 x 1 random vector with zero mean. 
 
 \begin{equation*}
 	\bm{\alpha} =
@@ -247,22 +231,21 @@ Where \textalpha \: and \textGamma \: are 2 × 1 constant vectors, \textbeta \: 
   
   The sum of current and expected future rewards satisfies the Bellman equation.
   \begin{equation}
-	  V(s) = \max \limits{ 0 \leq x {-L(s)\epsilonV(g(s,x,\epsilon))}
+	V(s) = \max\limits_{{0 \leq x}} [ - L(s) + \delta E_{\epsilon}V(g(s,x,\epsilon))]
 	  \label{eq:myeq3}
   \end{equation}
   
   Given the model structure, one cannot omit the possibility that x <=0 will bind in certain states.
   Therefore, the shadow-price function λ(s) characterized by Euler conditions:
-  \begin{equation}
-	  \delta \lambda^{T} E_{\epsilon} (g(s, x, \epsilon)) =  \mu
-  \end{equation}
-  \begin{equation}
-	  \lambda(s) = -\Omega(s_{t}-s^{*}) + \delta \beta^{T}E_{\epsilon} \lambda (g(s,x,\epsilon))
-  \end{equation}
+\begin{equation}
+    \delta \lambda^{T} E_{\epsilon} (g(s, x, \epsilon)) =  \mu
+\end{equation}
+\begin{equation}
+	\lambda(s) = -\Omega(s_{t}-s^{*}) + \delta \beta^{T}E_{\epsilon} \lambda (g(s,x,\epsilon))
+\end{equation}
   
-  The Shadow price function represents the value of the Lagrange multiplier. Therefore, in the context of this problem, the shadow price function is the change in the optimal value per unit of infinitesimal change in the constraints (nominal interest rate and inflation variation). 
-  
-  It follows that along the optimal path
+The Shadow price function represents the value of the Lagrange multiplier. Therefore, in the context of this problem, the shadow price function is the change in the optimal value per unit of infinitesimal change in the constraints (nominal interest rate and inflation variation). 
+It follows that along the optimal path:
   \begin{equation}
 	  \delta \gamma TE_{t} \lambda_{t+1} = \mu_{t}
   \end{equation}
@@ -273,50 +256,85 @@ Where \textalpha \: and \textGamma \: are 2 × 1 constant vectors, \textbeta \: 
 	x_{t}\geq 0 \mu_{t} \leq 0 x_{t}>0 ==> u_{t} - 0
   \end{equation*}
   Thus, in any period, nominal interest rate x is reduced until either the long-run marginal reward  µ or the nominal interest rate is driven to zero. 
-  
-  \subsection{Entry Exit Model} % See page 346 of Text
-  \:\:\:\:\:\: Consider a market participant that operates in an uncertain profit environment. That market participant is a firm operating in the cable industry. 
-  The firm is either producing nothing or it is actively producing \emph{q} units of a good per period at a cost of \emph{c}. 
-  This is charaterized by the binary state \textdelta (\textdelta =0 for inactive, \textdelta =1 for active), there is also an exogenous stochastic state representing the return per unit of output, \emph{P}, 
-  which is described by the following equation:
-  \begin{equation}
-	P_{t} = \mu (P)dt + \sigma(\emph{P})d \emph{z}
-\end{equation}
-	The firm faces fixed costs of activating and deactivating of I and E, with $I + E \ge 0$. The value function for any choice of a switching strategy is:
-	\begin{equation}
-	V(P_{0}) = E_{0} \bigg[ \int_\infty^0\! e^{-\emph{pt}} \delta_t (P_t-c) \, \mathrm{dt} -  \sum_{i=1}^{\infty} e^{-pt^{a}_{i}} I +e^{-pt^d_i} E \bigg]
-\end{equation}
-% \[ \int_{\infty}^{0} [e^{-\emph{p}t}\delta_{t}(P_{t}-c)\,dt \ - \[ \sum_{i=1}^{\infty}(e^{-pt^{a}_{i}}I+e^{-pt^{d}_{i}}E)}] \]
 
-t\textsuperscript{a}\textsubscript{i} and t\textsuperscript{d}\textsubscript{i} are the times at which activation and deactivation occur.
-It is reasonable to assume that positive transition costs should be made infrequently. In addition, it is intuitively reasonable that the optimal strategy is to activate when P is sufficiently high, P = P\textsubscript{a}h; 
-otherwise, infinite transaction costs would be incurred. Therefore, the value function is thought of as a pair of functions where on represents an active firm V\textsuperscript{a}, and one for when it is inactive, V\textsuperscript{i}.
-The former is defined on the interval [P\textsubscript{l}, $\infty$), the latter on the interval [0, P\textsubscript{h}]. On the interior of these regions, the value functions satisfy the Feynman-Kac equations:
+\subsection{Profit Model}
+
+\subsubsection{Standard Profit Equation}
+\:\:\:\:\:\: Consider a profit model for a cable company that is defined by internet revenue per passing less two costs bases: \emph{C\textsubscript{f}} and \emph{C\textsubscript{v}}. 
+\emph{C\textsubscript{f}} represents the fixed average customer per customer and \emph{C\textsubscript{v}} represents the variable average cost per customer. 
+Additional information about financial calcuations is provided in the appendix. 
 \begin{equation}
-	pV^{a} = P - c + \mu(P)V^{a}_{P} + \sigma^2(P)V^{i}_{PP}
+	\pi_{t} = \emph{rev} * \emph{pen} - (C_{f}+C_{v})
 \end{equation}
+This equation represents the short run profit per quarter. 
+Due to significantly high fixed costs, \emph{C\textsubscript{f}} is to be paid each period and theoretically, represents required interest payments.
+
+Now consider a new cable company entering the market at time t\textsubscript{new}:
 \begin{equation}
-	pV^{i} = \mu(P)V^{i}_{P} + \sigma^2(P)V^{i}_{PP}
+	\pi_{t_{new}} = \emph{rev} * \emph{pen} - (C_{f}+C_{v})
+\end{equation}
+Assuming all else equal, the fixed cost for the new cable company is adjusted to the new interest rate.
+
+\subsubsection{Demand Equation}
+\:\:\:\:\:\:Now consider a demand function that defines a functional relationship between penetration rate and cost to customer per passing.
+Let Q equal estimated passings (the estimated number of customers that it can provide services for).
+Let C be the per-acre variable costs of operation (C) which are known and constant.
+\begin{equation}
+	P = Y - bQ
+\end{equation}
+	Where Y is the stochastic variable and \emph{b} is the constant slope. The variable Y follows a geometric Brownian motion represented by:
+\begin{equation}
+	dY = \alpha Y dt + \sigma Y dz
+\end{equation}
+	\textalpha\:\: is the drift parameter or in other words, the growth rate of Y, \textsigma \:\: is the standard deviation in the drift, and dz the increment of the Weiner process.
+
+\subsubsection{Short Run Profit Model for Entry and Exit}
+\:\:\:\:\:\:	Estimated passings are determined by the stock of capital and \myworries{INTEREST RATE ENVIRONMENT},
+	Q = G(K); \:\:\:\:\:\: Q \textgreater G'(K); \:\:\:\:\:\: Q \textless G''(K);
+	Therefore, the profit of the firm is given by:
+\begin{equation}
+	\pi = [Y - bG(k)-C]G(K)
 \end{equation}
 
-At the upper boundary point P\textsubscript{h} the firm will enter the market and become active at a cost of I. 
-This is enforced by the value functions which require the switching cost to reach equality: V\textsuperscript{i}(P\textsubscript{h})= V\textsuperscript{a}(P\textsubscript{h}) - I.
-At the point P\textsubscript{l} when the firm changes from an active to an inactive state, the value function requires: V\textsuperscript{a}(P\textsubscript{l})= V\textsuperscript{i}(P\textsubscript{l}) - E.
-
-The value matching functions holds when considering arbitrary choices of P\textsubscript{l} and P\textsubscript{h}. 
-However, optimal choices must satisfy the smooth-pasting conditions as follows:
+The marginal revenue product of capital is \begin{equation}G'(K)[Y-2bG(K)-C]\end{equation}
+\subsubsection{Entry and Exit Strategies}
+	The model herein is an expansion of the models of Dixit (1989) and Dixit and Pindyck (1994). 
+The expansion was created by lsik (2003) for Agricultural Economics, however, it is generally applicable to the network service provider industry.
 \begin{equation}
-		V^{i}(P_{l}=V^{a}_{P}(P_{l}))
-	\end{equation}
-\begin{equation}
-		V^{i}(P_{h}=V^{a}_{P}(P_{h}))
-	\end{equation}
-Due to the nature of the cable industry and the necessity of connectivity, exit is irreversible and its cost is as expensive as the initial investment.
-
-\subsection{Entry Exit Model Two}
+	\begin{split}
+		-A(Y^O_H)^{\beta_1} + B(Y^O_H)^{\beta_2}  + G(K_0) \times \bigg( \frac{Y^O_H}{\emph{p}-\alpha} -  \frac{bG{K}+C}{\emph{p}}    \bigg) =K_0 
+		\\
+		\\
+		-\beta_1 A (Y^O_H)^{\beta_1-1} + -\beta_2 B (Y^O_H)^{\beta_2-1}  + \frac{G(K_0)}{\emph{p}-\alpha} = 0 
+		\\
+		\\
+		-A(Y^O_L)^{\beta_1} + B(Y^O_L)^{\beta_2} + G(K_0) \times \bigg( \frac{Y^O_L}{\emph{p}-\alpha} -  \frac{bG{K_0}+C}{\emph{p}}    \bigg) = -E
+		\\
+		\\
+		-\beta_1 A (Y^O_L)^{\beta_1-1} + -\beta_2 B (Y^O_L)^{\beta_2-1}  + \frac{G(K_0)}{\emph{p}-\alpha} = 0
+	\end{split}
+\end{equation}
+Where B and A are constants to be determined, Y\textsuperscript{O}\textsubscript{L}, the entry threshold for the demand variable, Y\textsuperscript{O}\textsubscript{H} the exit threshold for the demand variable, and 
 
 \section{Results}\label{sec:res}
-	\section{Conclusion}
+\subsection{Optimal Monetary Policy Results}
+\:\:\:\:\:\: The Optimal Monetary Policy model is tested using an 100-function bivariate cubic spline basis on the square where s\textsubscript{1} and s\textsubscript{2} are values ranging from -15 to 10. 
+The cubic spline basis is then constructed by forming then tensor products of 10 univariate cubic B-spline basis functions in addtion to an 100 node collocation grid.
+Linear quadratic approximation values and actions are used to initialize the collocation algorithm. 
+Finally, dpsolve is used to solve the collocation equation using Newton's method.
+
+The postoptimality analysis reveals that the GDP gap and the underlying inflation can determine the optimal nominal interest. 
+This is is indicated in the "Optimal Monetary Policy" figure. 
+The residual becomes quite large around the nonnegativity constraint and may not accurately represent the optimal nominal interest rate near zero.
+Despite this, the overall residuals are relatively small elsewhere.
+
+With Facker et al's CompEcon Toolbox, the routine dpsimul was used to simulate the model 5,000 times over a 20-year period starting from an initial GDP gap of 15\% and inflation rate of 10\%.
+The GDP Gap expected state path drops quite quickly and steadys out in the long run. 
+However, the expected state path for the inflation rate takes much longer to return to normalcy.
+Given recent inflation scares, these findings demonstrate the reality of an economic downturn in the near future.
+
+\subsection{Entry Exit Model}
+
 \bibliographystyle{ecca}
 	\bibliography{myrefs}
 \begin{appendices}
@@ -326,14 +344,14 @@ Due to the nature of the cable industry and the necessity of connectivity, exit 
 \pagebreak
 \begin{table}%[ht] or say [H]
 	\centering
-	\begin{tabular}{cccccc}\hline % each column is centered (else could have left aligned [l] or right [r])
-		\toprule			
+	\begin{tabular}{cccccc} 
+		\toprule
 		Label & Q1 2019 & Q2 2019 & Q3 2019 & Q4 2019 & FY 2019 \\
 		\midrule
 		Penetration Rate & 50\% & 50\% & 51\% & 51\% & 51\% \\
-		\:\: Revenue per Passing & $78.31 & $79.49 & $80.77 & $83.31 & $319.57 \\
-		\:\: Cost to Service Customer Per Capita & $35.46 & $34.23 & $36.47 & $34.40 & $139.53 \\
-		\:\: Other Costs Per Passing & $43.34 & $41.84 & $44.57 & $42.04 & $170.54 \\
+		Revenue per Passing & \$78.31 & \$79.49 & \$80.77 & \$83.31 & \$319.57 \\
+		Cost to Service Customer Per Capita & \$35.46 & \$34.23 & \$36.47 & \$34.40 & \$139.53 \\
+		Other Costs Per Passing & \$43.34 & \$41.84 & \$44.57 & \$42.04 & \$170.54 \\
 		\bottomrule
 	\end{tabular}
 	\caption{Data points for 2019}
@@ -341,18 +359,18 @@ Due to the nature of the cable industry and the necessity of connectivity, exit 
 \end{table}
 \begin{table}%[ht] or say [H]
 	\centering
-	\begin{tabular}{cccccc}\hline % each column is centered (else could have left aligned [l] or right [r])
+	\begin{tabular}{cccccc} % each column is centered (else could have left aligned [l] or right [r])
 		\toprule			
-		Label & Q1 2020 & Q2 2020 & Q3 2020 & Q4 2020 & FY 2020 \\
+			Label & Q1 2020 & Q2 2020 & Q3 2020 & Q4 2020 & FY 2020 \\
 		\midrule
-		Penetration Rate & 52\% & 53\% & 54\% & 54\% & 54\% \\
-		\:\: Revenue per Passing & $84.07 & $85.94 & $89.06 & $91.22 & $347.49 \\
-		\:\: Cost to Service Customer Per Capita & $35.26 & $35.06 & $35.87 & $35.16 & $140.19 \\
-		\:\: Other Costs Per Passing & $43.09 & $42.85 & $43.84 & $42.97 & $171.34 \\
+			Penetration Rate & 52\% & 53\% & 54\% & 54\% & 54\% \\
+			Revenue per Passing & \$84.07 & \$85.94 & \$89.06 & \$91.22 & \$347.49 \\
+			Cost to Service Customer & \$35.26 & \$35.06 & \$35.87 & \$35.16 & \$140.19 \\
+			Other Costs Per Passing & \$43.09 & \$42.85 & \$43.84 & \$42.97 & \$171.34 \\
 		\bottomrule
 	\end{tabular}
 	\caption{Data points for 2020}
-	\label{tab:myt1}
+	\label{tab:myt2}
 \end{table}
 \begin{table}%[ht] or say [H]
 	\centering
@@ -360,37 +378,31 @@ Due to the nature of the cable industry and the necessity of connectivity, exit 
 		\toprule			
 		Label & Q1 2021 & Q2 2021 & Q3 2021 \\
 		\midrule
-		Penetration Rate & 55\% & 55\% & 55\% \\
-		\:\: Revenue per Passing & $94.90 & $96.89 & $99.04 \\
-		\:\: Cost to Service Customer Per Capita & $33.66 & $33.91 & $35.07 \\
-		\:\: Other Costs Per Passing & $41.14 & $41.44 & $42.86 \\
+			Penetration Rate \& 55\% \& 55\% \& 55\% \\
+			Revenue per Passing & \$94.90 & \$96.89 & \$99.04 \\
+			Cost to Service Customer Per Capita & \$33.66 & \$33.91 & \$35.07 \\
+			Other Costs Per Passing & \$41.14 & \$41.44 & \$42.86 \\
 		\bottomrule
 	\end{tabular}
 	\caption{Data points for 2021}
-	\label{tab:myt1}
+	\label{tab:myt3}
 \end{table}
 
 \section{Figures}\label{app:figures}
 
 \begin{figure}
-	\includegraphics[width=\columnwidth]{img/Optimal_Monetary_Policy/Optimal_Monetary_Policy}
-	\caption{Approximation Residuals}
+	\includegraphics[width=\columnwidth]{img/Optimal_Monetary_Policy/OMP.png}
+	\caption{Monetary Policy Figures}
 	\label{fig:myf1}
 \end{figure}
+
 \begin{figure}
-	\includegraphics[width=\columnwidth]{img/Optimal_Monetary_Policy/Approximation_Residual}
-	\caption{Approximation Residuals}
-	\label{fig:myf2}
+	\includegraphics[width=\columnwidth]{img/Optimal_Monetary_Policy/OMP.png}
+	\caption{Entry Exit Figures}
+	\label{fig:myf1}
 \end{figure}
-\begin{figure}
-	\includegraphics[width=\columnwidth]{img/Optimal_Monetary_Policy/Expected_State_Path_InflationRate}
-	\caption{Approximation Residuals}
-	\label{fig:myf3}
-\end{figure}
-\begin{figure}
-	\includegraphics[width=\columnwidth]{img/Optimal_Monetary_Policy/Expected_State_Path_GDP_GAP}
-	\caption{Approximation Residuals}
-	\label{fig:myf4}
-\end{figure}
+\pagebreak
+\bibliographystyle{ecca}
+\bibliography{newrefs}
 \end{appendices}
 \end{document}
